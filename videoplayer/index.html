@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>the search engine. video player</title>
+    <script src="https://www.youtube.com/player_api"></script>
+    <script>
+        function loadVideo() {
+            var videoUrl = document.getElementById('videoUrl').value;
+            var videoId = extractVideoId(videoUrl);
+            var player = new YT.Player('player', {
+                videoId: videoId,
+                playerVars: {
+                    autoplay: 0,
+                    controls: 1,
+                    rel: 0,
+                    showinfo: 0
+                }
+            });
+        }
+
+        function extractVideoId(url) {
+            var videoId = "";
+            var regex = /[?&]v=([^&#]*)/;
+            var match = regex.exec(url);
+            if (match && match[1]) {
+                videoId = match[1];
+            }
+            return videoId;
+        }
+    </script>
+</head>
+<body>
+  <div class="center">
+    <h1>the search engine.</h1>
+    <h1>video player</h1>
+    <label for="videoUrl">enter url:</label>
+    <input type="text" id="videoUrl">
+    <button onclick="loadVideo()">submit</button>
+    <br>
+    <div id="player"></div>
+    <h3><a href="https://thesearchengine.github.io">the search engine.</a></h3>
+  </div>
+</body>
+</html>
